@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
@@ -8,7 +8,10 @@ const config = 'https://jsonplaceholder.typicode.com/posts';
 class App extends Component {
   state = { posts: [] };
 
-  componentDidMount() {}
+  async componentDidMount() {
+    const { data } = await axios.get(config);
+    this.setState({ posts: data });
+  }
 
   handleAdd = () => {
     console.log('Post added.');
@@ -40,7 +43,7 @@ class App extends Component {
           </thead>
           <tbody>
             {posts.map((post) => (
-              <tr>
+              <tr key={post.id}>
                 <td>{post.title}</td>
                 <td>
                   <button
