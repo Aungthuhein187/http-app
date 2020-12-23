@@ -9,16 +9,25 @@ class App extends Component {
   state = { posts: [] };
 
   async componentDidMount() {
-    const { data } = await axios.get(config);
-    this.setState({ posts: data });
+    const { data: posts } = await axios.get(config);
+    this.setState({ posts });
   }
 
-  handleAdd = () => {
-    console.log('Post added.');
+  handleAdd = async () => {
+    const obj = { title: 'Hello Aung', body: 'Hi everyone!' };
+    const { data: post } = await axios.post(config, obj);
+    const posts = [post, ...this.state.posts];
+    this.setState({ posts });
   };
 
-  handleUpdate = (post) => {
-    console.log('Post updated.', post);
+  handleUpdate = async (post) => {
+    post.title = 'Updated post';
+    await axios.put(`${config}/${post.id}`, post);
+
+    const posts = [...this.state.posts];
+    const index = posts.indexOf(post);
+    posts[index] = { ...post };
+    this.setState({ posts });
   };
 
   handleDelete = async (post) => {
