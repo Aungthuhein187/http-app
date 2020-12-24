@@ -37,7 +37,7 @@ class App extends Component {
     this.setState({ posts });
 
     try {
-      await http.delete(`${config.apiEndpoint}/${post.id}`);
+      await http.delete(`e${config.apiEndpoint}/${post.id}`);
     } catch (error) {
       if (error.response && error.response.status === 404)
         alert('This post has already been deleted.');

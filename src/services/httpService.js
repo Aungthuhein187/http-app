@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import http from '../services/logService';
 
 const obj = {
   get: axios.get,
@@ -15,7 +16,7 @@ axios.interceptors.response.use(null, (error) => {
     error.response.status < 500;
 
   if (!expectedError) {
-    console.log('Logging error', error);
+    http.log(error);
     toast.error('An unexpected error occured');
   }
 

@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import http from './services/logService';
 import reportWebVitals from './reportWebVitals';
+
+http.init();
 
 ReactDOM.render(
   <React.StrictMode>
